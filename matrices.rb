@@ -45,7 +45,7 @@ class Matrix
 	end
 
 	def transpose(matrix = self)
-		a = zero_matrix(matrix.rows, matrix.columns)
+		a = empty_matrix(matrix.rows, matrix.columns)
 		(0...a.columns).each { |c| (0...a.rows).each { |r| a.cells[r][c] = matrix.cells[c][r] } }
 		return a
 	end
@@ -95,7 +95,7 @@ class Matrix
 
 	def multiply(a = self, b)
 		return nil unless (a.columns == b.rows) && (a.rows == b.columns)
-		c = zero_matrix(a.rows)
+		c = empty_matrix(a.rows)
 		(0...c.rows).each { |i| (0...c.rows).each { |j| (0...b.rows).each { |k| c.cells[j][i] += a.cells[j][k] * b.cells[k][i] } } }
 		return c
 	end
@@ -107,7 +107,7 @@ class Matrix
 
 end
 
-def zero_matrix(columns, rows)
+def empty_matrix(columns, rows)
 	return Matrix.new(Array.new(rows) { Array.new(columns) { 0 } })
 end
 
