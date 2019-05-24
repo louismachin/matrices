@@ -24,6 +24,10 @@ class Matrix
 	end
 
 	def minor(matrix = self, c, r)
+		return matrix.submatrix(c, r).determinant
+	end
+
+	def submatrix(matrix = self, c, r)
 		cells = []
 		(0...matrix.columns).each { |column|
 			m_row = []

@@ -39,8 +39,13 @@
 ```
 
 ```ruby
-    a.minor(1, 0)
+    a.submatrix(1, 0)
     # [[2, 3], [8, 9]]
+```
+
+```ruby
+    a.minor(1, 0)
+    # -6.0
 ```
 
 ```ruby
