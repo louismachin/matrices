@@ -3,7 +3,7 @@
 ## Usage
 
 ```ruby
-require 'matrices.rb'
+    require 'matrices.rb'
 ```
 
 ```ruby
