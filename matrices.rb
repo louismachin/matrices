@@ -40,7 +40,13 @@ class Matrix
 		return Matrix.new(cells)
 	end
 
-	def swap_row(matrix = self, a, b)
+	def transpose(matrix = self)
+		a = zero_matrix(matrix.rows, matrix.columns)
+		(0...a.columns).each { |c| (0...a.rows).each { |r| a.cells[r][c] = matrix.cells[c][r] } }
+		return a
+	end
+
+	def swap_rows(matrix = self, a, b)
 		matrix.cells[a], matrix.cells[b] = matrix.cells[b], matrix.cells[a]
 		return matrix
 	end
@@ -58,7 +64,7 @@ class Matrix
 				k, is_swapped = 0, false
 				until is_swapped || (k == a[0].length)
 					unless a[k][j] == 0
-						a = swap_row(Matrix.new(a), i, k).cells
+						a = swap_rows(Matrix.new(a), i, k).cells
 						is_swapped, sign = true, sign * -1
 					end
 					k += 1
@@ -90,10 +96,15 @@ class Matrix
 		return c
 	end
 
+	def scale(matrix = self, s)
+		(0...matrix.columns).each { |i| (0...matrix.rows).each { |j| matrix.cells[j][i] *= s } }
+		return matrix
+	end
+
 end
 
-def zero_matrix(order)
-	return Matrix.new(Array.new(order) { Array.new(order) { 0 } })
+def zero_matrix(columns, rows)
+	return Matrix.new(Array.new(rows) { Array.new(columns) { 0 } })
 end
 
 def unit_matrix(order)
