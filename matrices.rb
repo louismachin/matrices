@@ -49,6 +49,22 @@ class Matrix
 		(0...a.columns).each { |c| (0...a.rows).each { |r| a.cells[r][c] = matrix.cells[c][r] } }
 		return a
 	end
+	
+	def minors(matrix = self)
+		a = empty_matrix(matrix.columns, matrix.rows)
+		(0...a.columns).each { |c| (0...a.rows).each { |r| a.cells[c][r] = matrix.minor(c, r) } }
+		return a
+	end
+
+	def cofactors(matrix = self)
+		a = matrix.minors
+		(0...a.columns).each { |c| (0...a.rows).each { |r| a.cells[c][r] *= -1 if ((r + c) % 2 == 1) } }
+		return a
+	end
+
+	def inverse(matrix = self)
+		return matrix.cofactors.transpose.scale(1 / matrix.determinant)
+	end
 
 	def swap_rows(matrix = self, a, b)
 		matrix.cells[a], matrix.cells[b] = matrix.cells[b], matrix.cells[a]
