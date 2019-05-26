@@ -120,11 +120,22 @@ class Matrix
 		(0...matrix.columns).each { |i| (0...matrix.rows).each { |j| matrix.cells[j][i] *= s } }
 		return matrix
 	end
+end
 
+class Vector < Matrix
+	def initialize(cells)
+		@cells = Matrix.new([cells]).transpose.cells
+	end
+
+	def row()
+		return self.transpose.cells.first
+	end
+
+	def is_stochastic?() return self.row.sum == 1 end
 end
 
 def empty_matrix(columns, rows)
-	return Matrix.new(Array.new(rows) { Array.new(columns) { 0 } })
+	return Matrix.new(Array.new(rows) { Array.new(columns) { 0 } } )
 end
 
 def unit_matrix(order)
