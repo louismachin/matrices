@@ -171,3 +171,8 @@
     u.parallel?(Vector.new [4,-3.5])
     # => true
 ```
+
+```ruby
+    y.unit()
+    # => [0.8, 0.6, 0, 0]
+```
