@@ -15,6 +15,9 @@
 ```
 
 ```ruby
+    u = Vector.new [8, -7]
+    v = Vector.new [5, -2, 18]
+    w = Vector.new [8, 13, -7]
     x = Vector.new [0, 0.2, 0.8, 0]
     y = Vector.new [0.4, 0.3, 0, 0]
     z = Vector.new [0, 1, 0]
@@ -97,7 +100,7 @@
 ```
 
 ```ruby
-    a.is_square?()
+    a.is_square?
     # => true
 ```
 
@@ -112,6 +115,16 @@
 ```
 
 ```ruby
+    empty_vector(3)
+    # => [0, 0, 0]
+```
+
+```ruby
+    x.is_vector?
+    # => true
+```
+
+```ruby
     x.is_stochastic?
     # => true
 
@@ -123,3 +136,34 @@
     a.multiply(z)
     # => [[2, 5, 8]]
 ```
+
+```ruby
+    u.magnitude.round(2)
+    # => 10.63
+```
+
+```ruby
+    u.direction.round(2)
+    # => -0.72
+```
+
+```ruby
+    v.dimension()
+    # => 3
+```
+
+```ruby
+    v.dot(w)
+    # => -112
+```
+
+```ruby
+    v.similarity(w).round(3)
+    # => -0.355
+```
+
+```ruby
+    v.cross(w)
+    # => [-220, -179, 30]
+```
+

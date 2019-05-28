@@ -19,6 +19,10 @@ class Matrix
 		return self.columns == self.rows 
 	end
 
+	def is_vector?()
+		return self.columns == 1
+	end
+
 	def trace
 		sum = 0
 		(0...self.rows).each { |k| sum += @cells[k][k]} if self.is_square?
@@ -140,8 +144,43 @@ class Vector < Matrix
 		return self.transpose.cells.first
 	end
 
+	def dimension()
+		return self.row.length
+	end
+
 	def is_stochastic?() 
 		return self.row.sum == 1
+	end
+
+	def magnitude(vector = self)
+		return nil unless vector.is_vector?
+		sum = 0; vector.row.each { |k| sum += k * k }
+		return Math.sqrt(sum)
+	end
+
+	def direction(vector = self)
+		return nil unless vector.is_vector? && vector.dimension == 2
+		return Math.atan2(vector.row[1], vector.row[0])
+	end
+
+	def similarity(a = self, b)
+		return nil unless a.dimension == b.dimension
+		return dot(a, b) / (a.magnitude * b.magnitude)
+	end
+
+	def dot(a = self, b)
+		return nil unless a.dimension == b.dimension
+		sum = 0; (0...a.dimension).each { |k| sum += a.row[k] * b.row[k] }
+		return sum
+	end
+
+	def cross(a = self, b)
+		return nil unless (a.dimension == b.dimension) && (a.dimension == 3)
+		return Vector.new [
+			a.row[1] * b.row[2] - a.row[2] * b.row[1], 
+			a.row[0] * b.row[2] - a.row[2] * b.row[0],
+			a.row[1] * b.row[2] - a.row[1] * b.row[0]
+		]
 	end
 end
 
@@ -153,4 +192,8 @@ def unit_matrix(order)
 	cells = Array.new(order) { Array.new(order) }
 	(0...order).each { |i| (0...order).each { |j| cells[i][j] = (i == j) ? 1 : 0 } }
 	return Matrix.new(cells)
+end
+
+def empty_vector(length)
+	return Vector.new(Array.new(length) {0})
 end
