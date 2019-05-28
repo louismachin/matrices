@@ -15,6 +15,12 @@
 ```
 
 ```ruby
+    x = Vector.new [0, 0.2, 0.8, 0]
+    y = Vector.new [0.4, 0.3, 0, 0]
+    z = Vector.new [0, 1, 0]
+```
+
+```ruby
     a.add(c.multiply(b))
     # [[40, 56, 72], [53, 73, 93], [66, 90, 114]]
 ```
@@ -103,4 +109,17 @@
 ```ruby
     unit_matrix(3)
     # [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+```
+
+```ruby
+    x.is_stochastic?
+    # => true
+
+    y.is_stochastic?
+    # => false
+```
+
+```ruby
+    a.multiply(z)
+    # => [[2, 5, 8]]
 ```

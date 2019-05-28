@@ -3,13 +3,21 @@ class Matrix
 		@cells = cells
 	end
 
-	def cells() return @cells end
+	def cells() 
+		return @cells
+	end
 
-	def columns() return @cells[0].length end
+	def columns() 
+		return @cells[0].length 
+	end
 
-	def rows() return @cells.length end
+	def rows() 
+		return @cells.length 
+	end
 
-	def is_square?() return self.columns == self.rows end
+	def is_square?() 
+		return self.columns == self.rows 
+	end
 
 	def trace
 		sum = 0
@@ -110,9 +118,10 @@ class Matrix
 	end
 
 	def multiply(a = self, b)
-		return nil unless (a.columns == b.rows) && (a.rows == b.columns)
-		c = empty_matrix(a.rows)
-		(0...c.rows).each { |i| (0...c.rows).each { |j| (0...b.rows).each { |k| c.cells[j][i] += a.cells[j][k] * b.cells[k][i] } } }
+		puts a.inspect, b.inspect
+		return nil unless (a.columns == b.rows)
+		c = empty_matrix(a.rows, b.columns)
+		(0...a.rows).each { |i| (0...b.columns).each { |j| (0...b.rows).each { |k| c.cells[j][i] += a.cells[i][k] * b.cells[k][j] } } }
 		return c
 	end
 
@@ -131,7 +140,9 @@ class Vector < Matrix
 		return self.transpose.cells.first
 	end
 
-	def is_stochastic?() return self.row.sum == 1 end
+	def is_stochastic?() 
+		return self.row.sum == 1
+	end
 end
 
 def empty_matrix(columns, rows)
