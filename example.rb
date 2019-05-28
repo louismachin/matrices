@@ -13,4 +13,4 @@ x = Vector.new [0, 0.2, 0.8, 0]
 y = Vector.new [0.4, 0.3, 0, 0]
 z = Vector.new [0, 1, 0]
 
-puts v.cross(w)
+puts Vector.new([4,-3.5]).parallel?(u)

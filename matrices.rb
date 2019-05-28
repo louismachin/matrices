@@ -152,15 +152,15 @@ class Vector < Matrix
 		return self.row.sum == 1
 	end
 
-	def magnitude(vector = self)
-		return nil unless vector.is_vector?
-		sum = 0; vector.row.each { |k| sum += k * k }
+	def magnitude(a = self)
+		return nil unless a.is_vector?
+		sum = 0; a.row.each { |k| sum += k * k }
 		return Math.sqrt(sum)
 	end
 
-	def direction(vector = self)
-		return nil unless vector.is_vector? && vector.dimension == 2
-		return Math.atan2(vector.row[1], vector.row[0])
+	def direction(a = self)
+		return nil unless a.is_vector? && a.dimension == 2
+		return Math.atan2(a.row[1], a.row[0])
 	end
 
 	def similarity(a = self, b)
@@ -181,6 +181,14 @@ class Vector < Matrix
 			a.row[0] * b.row[2] - a.row[2] * b.row[0],
 			a.row[1] * b.row[2] - a.row[1] * b.row[0]
 		]
+	end
+
+	def unit(a = self)
+		return a.scale(1 / a.magnitude)
+	end
+
+	def parallel?(a = self, b)
+		return a.unit.row == b.unit.row
 	end
 end
 
